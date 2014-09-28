@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/btn_dropdown_normal2</item>
+        <item name="android:shadowColor">@color/white</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fadingEdge">horizontal|vertical</item>
+    </style>
+    
+</resources>

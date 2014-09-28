@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Groepsmaker</string>
+
+    <string-array name="names">
+        <item>Anke</item>
+        <item>Bea</item>
+        <item>Corine</item>
+        <item>Dewi</item>
+        <item>Els</item>
+        <item>Fleur</item>
+        <item>Gwen</item>
+        <item>Hester</item>
+        <item>Iris</item>
+        <item>Josien</item>
+    </string-array>
+    <string-array name="colorvalues">
+        <item>#00ff66</item>
+        <item>#336600</item>
+        <item>#669966</item>
+        <item>#ff0066</item>
+        <item>#cc6699</item>
+        <item>#cc0033</item>
+        <item>#000000</item>
+    </string-array>
+
+    <string name="help_intro">Groepsmaker helpt u een grote groep te verdelen in subgroepen en rekening te houden met welke combinaties u niet of juist wel geschikt vindt. Het programma onthoudt uw groep. De uiteindelijke samenstelling kunt u via e-mail of sms naar bijv digibord of mobiele telefoon zenden.</string>
+    <string name="help_propertiesactivity">Maak een groep aan via de knop rechtsonder. Gebruik de spraakknop voor extra snelheid.  </string>
+    <string name="help_listviewactivity">Als u een groep heeft samengesteld. kiest u onder hoeveel subgroepen u wilt hebben. Daarna klikt u op de namen om groepsleden bij elkaar of juist niet bij elkaar te krijgen. Lang klikken geeft extra opties.</string>
+    <string name="help_resultactvity">Hier staat de groepssamenstelling weergegeven. Wilt u toch een andere verdeling kunt u de backbutton indrukken en opnieuw verdelen. Ook kunt u door lang klikken handmatig wijzigingen in de lijst aanbrengen.</string>
+    <string name="help_uitleg">Uitleg</string>
+    <string name="naam_wijzigen">Naam wijzigen</string>
+    <string name="verplaatsen_naar">Verplaatsen naar&#8230;</string>
+    <string name="verwijderen">Verwijderen</string>
+    <string name="sms">SMS</string>
+    <string name="share">Share</string>
+        <string name="aantalgroepen">Aantal Groepen</string>
+        <string name="splitstekst">Vink groepsleden aan om ze gelijk te laten verdelen over de subgroepen. Bijv alle jongens, of alle ouderen </string>
+        
+    <string name="namen">Namen&#8230;</string>    
+    <string name="groep1">Groep</string>
+    <string name="groepsleden_toevoegen">Groepsleden toevoegen</string>
+    <string name="bewerken">Bewerken</string>
+    <string name="ok">OK</string>
+    <string name="kleurencombinatiesnietmogelijk">De gekozen kleurencombinaties zijn niet goed mogelijk</string>
+    <string name="annuleren">Annuleren</string>
+    <string name="leden_toevoegen">Toevoegen</string>
+    <string name="nogroupmembers">Nog geen groepsleden toegevoegd</string>
+    <string name="defaultgroup">Anja Bea, Cleo, Day, Eon, Flitz, Go, Hi, Indigo</string>
+    <string name="verdeel">Verdeel</string>
+    <string name="result_page">Groepsverdeling</string>
+    <string name="howmuch_subgroups">aantal subgroepjes</string>
+    <string name="group_list">Voeg groepsleden toe of haal ze weg. Leden scheiden door spaties of kommas</string>
+    <string name="button_splits">Splits&#8230;</string>
+    <string name="button_go">Klaar</string>
+    <string name="kies_combinaties">Maak een groep aan via de knop rechtsonder. Gebruik de spraakknop voor extra snelheid. Als u namen heeft kiest u onder hoeveel subgroepen u wilt hebben. Daarna klikt u op de namen om groepsleden bij elkaar of juist niet bij elkaar te krijgen. Lang klikken geeft extra opties. </string>
+    <string name="kies_kleur">Kies kleur</string>
+    <string name="groep">Groepssamenstelling</string>
+    <string name="kleur0">Klaar</string>
+    <string name="kleur1">1 Samen</string>
+    <string name="kleur2">2 Samen</string>
+    <string name="kleur3">3 Samen</string>
+    <string name="kleur4">1 Apart van&#8230;</string>
+    <string name="kleur5">2 Apart van&#8230;</string>
+    <string name="kleur6">3 Apart van&#8230;</string>
+    <string name="kleur7">Geen Kleur</string>
+    <string name="kleur8">Alles Donker</string>
+    <string name="groepsledentoevoegen">Voeg groepsleden toe of haal ze weg. Gebruik kommas of spaties als scheidingsteken.</string>
+
+</resources>

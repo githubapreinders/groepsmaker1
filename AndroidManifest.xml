@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="course.examples.UI.ListLayout"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="10"
+        android:targetSdkVersion="18" />
+
+    <application
+        android:name=".GroepsMaker"
+        android:allowBackup="false"
+        android:icon="@drawable/icongroup"
+        android:label="@string/app_name" >
+        <activity
+            android:name=".ListViewActivity"
+            android:label="@string/groep">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity 
+            android:name=".ResultPage"
+            android:label="@string/result_page"
+            >
+        </activity>
+        <activity 
+            android:name=".GroupProperties"
+            android:label="@string/groepsleden_toevoegen"
+            >
+        </activity>
+        <activity 
+            android:name=".ColorDialog"
+            android:label="@string/kies_kleur"
+            >
+        </activity>
+        
+    </application>
+
+</manifest>
