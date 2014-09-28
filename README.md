@@ -1,0 +1,1 @@
+Groepsmaker is a small android application that makes a list of groupmembers and randomises them into subgroups. Special feature is that certain combinations can be ruled out or commanded. Great for teachers.
