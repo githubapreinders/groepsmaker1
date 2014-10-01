@@ -67,7 +67,7 @@
             android:layout_weight="4"
              />
 
-        <Spinner
+        <Button
             android:id="@+id/group_properties_spinner1"
             android:layout_width="50dp"
             android:layout_height="48dp"

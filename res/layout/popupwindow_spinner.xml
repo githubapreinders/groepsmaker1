@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layerlist_white_container_and_groupimage"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:paddingTop="5dp" >
+
+    <TextView
+        android:id="@+id/textViewspinnerpopup0"
+        style="@style/textview_contextmenu"
+        android:gravity="center|left"
+        android:text="@string/aantalgroepen"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textViewspinnerpopup1"
+        style="@style/textview_contextmenu_spinner"
+        android:text="2" />
+
+    <TextView
+        android:id="@+id/textViewspinnerpopup2"
+        style="@style/textview_contextmenu_spinner"
+        android:text="3" />
+
+    <TextView
+        android:id="@+id/textViewspinnerpopup3"
+        style="@style/textview_contextmenu_spinner"
+        android:text="4" />
+
+    <TextView
+        android:id="@+id/textViewspinnerpopup4"
+        style="@style/textview_contextmenu_spinner"
+        android:text="5" />
+
+    <TextView
+        android:id="@+id/textViewspinnerpopup5"
+        style="@style/textview_contextmenu_spinner"
+        android:text="6" />
+
+    <TextView
+        android:id="@+id/textViewspinnerpopup6"
+        style="@style/textview_contextmenu_spinner"
+        android:text="7" />
+
+    <TextView
+        android:id="@+id/textViewspinnerpopup7"
+        style="@style/textview_contextmenu_spinner"
+        android:text="8" />
+
+    <TextView
+        android:id="@+id/textViewspinnerpopup8"
+        style="@style/textview_contextmenu_spinner"
+        android:text="9" />
+
+    <TextView
+        android:id="@+id/textViewspinnerpopup9"
+        style="@style/textview_contextmenu_spinner"
+        android:text="10" />
+
+</LinearLayout>

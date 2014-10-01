@@ -41,6 +41,8 @@ public class ListViewActivity extends ListActivity
 
 	PopupWindow popup;
 	ListView lv;
+	Context context;
+	Button spinnerpopup;
 	private final String TAG = "in ListViewActivity";
 	static int escapecounter = 0;
 	boolean doneflag = false;
@@ -73,13 +75,14 @@ public class ListViewActivity extends ListActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.result_page);
-
+		this.context = getApplicationContext();
+		this.HOWMUCHGROUPS=2;
 		// Een spinner wordt gedefinieerd
-		spinner = (Spinner) findViewById(R.id.group_properties_spinner1);
-		//spinner.setBackgroundResource(R.drawable.btn_dropdown_normal);
-		String[] items = new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10" };
-		MySpinnerArrayAdapter adapter = new MySpinnerArrayAdapter(this, android.R.layout.simple_spinner_item, items);
-		spinner.setAdapter(adapter);
+//		spinner = (Spinner) findViewById(R.id.group_properties_spinner1);
+//		//spinner.setBackgroundResource(R.drawable.btn_dropdown_normal);
+//		String[] items = new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10" };
+//		MySpinnerArrayAdapter adapter = new MySpinnerArrayAdapter(this, android.R.layout.simple_spinner_item, items);
+//		spinner.setAdapter(adapter);
 
 		// groepsnamen en hoeveelheid subgroepjes worden uit de intent gehaald
 		// uit de intentstring worden namen gefilterd(gebruikers mogen namen op
@@ -146,6 +149,10 @@ public class ListViewActivity extends ListActivity
 		Button btnmakesubgroups = (Button) findViewById(R.id.verdeel);
 		btnmakesubgroups.setOnClickListener(new tomakeSubGroups());
 
+		spinnerpopup = (Button)findViewById(R.id.group_properties_spinner1);
+		spinnerpopup.setOnClickListener(new showSpinnerpopup());
+		spinnerpopup.setText("2");
+		
 		Button btnGroupProperties = (Button) findViewById(R.id.properties);
 		btnGroupProperties.setOnClickListener(new gotoProperties());
 
@@ -163,6 +170,135 @@ public class ListViewActivity extends ListActivity
 		}
 	}
 
+	private class showSpinnerpopup implements View.OnClickListener
+	{
+
+		@Override
+		public void onClick(View v)
+		{
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
+			final PopupWindow pw = new PopupWindow(inflater.inflate(R.layout.popupwindow_spinner, null, false),400,550, true);
+			pw.showAtLocation(v.getRootView(), Gravity.CENTER, 0, 25);
+			View mypopupview = pw.getContentView();
+			
+			
+			
+			final TextView t1 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup1);
+			t1.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					HOWMUCHGROUPS = 2;
+					spinnerpopup.setText("2");
+					pw.dismiss();
+				}
+			});
+
+
+			final TextView t2 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup2);
+			t2.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					HOWMUCHGROUPS = 3;
+					spinnerpopup.setText("3");
+					pw.dismiss();
+				}
+			});
+			
+			final TextView t3 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup3);
+			t3.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					HOWMUCHGROUPS = 4;
+					spinnerpopup.setText("4");
+					pw.dismiss();
+				}
+			});
+			
+			final TextView t4 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup4);
+			t4.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					HOWMUCHGROUPS = 5;
+					spinnerpopup.setText("5");
+					pw.dismiss();
+				}
+			});
+			
+			final TextView t5 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup5);
+			t5.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					HOWMUCHGROUPS = 6;
+					spinnerpopup.setText("6");
+					pw.dismiss();
+				}
+			});
+			
+			final TextView t6 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup6);
+			t6.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					HOWMUCHGROUPS = 7;
+					spinnerpopup.setText("7");
+					pw.dismiss();
+				}
+			});
+			
+			final TextView t7 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup7);
+			t7.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					HOWMUCHGROUPS = 8;
+					spinnerpopup.setText("8");
+					pw.dismiss();
+				}
+			});
+			
+			final TextView t8 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup8);
+			t8.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					HOWMUCHGROUPS = 9;
+					spinnerpopup.setText("9");
+					pw.dismiss();
+				}
+			});
+			
+			final TextView t9 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup9);
+			t9.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					HOWMUCHGROUPS = 10;
+					spinnerpopup.setText("10");
+					pw.dismiss();
+				}
+			});
+			
+					}
+		
+	}
+	
+	
+	
+	
 	/**
 	 * Verandert de dataset in een andere view wanneer er geen data zijn
 	 * (gebruiksaanwijzing) of wanneer er op de contexthelp wordt gedrukt.
@@ -207,7 +343,7 @@ public class ListViewActivity extends ListActivity
 	}
 
 	
-	
+	//TODO : pile all the separate clickhandlers into one neat private class.
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View view, final ContextMenuInfo menuInfo)
 	{
@@ -317,6 +453,11 @@ public class ListViewActivity extends ListActivity
 		
 	}
 
+	/**
+	 * Contextmenu in the form of a popupwindow as an alternative for clicking repeatedly on 
+	 * a listview-item.
+	 */
+	
 	
 	public boolean handlepopupWindow(ContextMenuInfo item, int textviewid)
 	{
@@ -415,115 +556,6 @@ public class ListViewActivity extends ListActivity
 		return true;
 	}
 
-	
-	
-	
-	
-	
-	
-	/**
-	 * gebruiker kiest een kleur uit het contextmenu en wordt gezet als
-	 * achtergrondkleur van het lijstitem waarop werd geklikt. kleur wordt in de
-	 * hashmap met naam-kleur combinaties gezet.
-	 */
-	@Override
-	public boolean onContextItemSelected(MenuItem item)
-	{
-
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-		String name = (String) lv.getItemAtPosition(info.position);
-		int id = item.getItemId();
-		int position = info.position;
-		int colorint = R.drawable.ic_menu_transparentkopie;
-		Drawable dr;
-		TextView tv = (TextView) info.targetView;
-		holder = myadapter.new ViewHolder();
-		holder.textView = (TextView) tv;
-
-		switch (id)
-		{
-		case R.id.item1:
-			colorint = colordrawables[0];
-			dr = getResources().getDrawable(colorint);
-			holder.getTextView().setBackgroundDrawable(dr);
-			boolean val = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
-			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val, colorint));
-			break;
-		case R.id.item2:
-			colorint = colordrawables[1];
-			dr = getResources().getDrawable(colorint);
-			holder.getTextView().setBackgroundDrawable(dr);
-			boolean val1 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
-			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val1, colorint));
-			break;
-		case R.id.item3:
-			colorint = colordrawables[2];
-			dr = getResources().getDrawable(colorint);
-			holder.getTextView().setBackgroundDrawable(dr);
-			boolean val2 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
-			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val2, colorint));
-			break;
-		case R.id.item4:
-			colorint = colordrawables[3];
-			dr = getResources().getDrawable(colorint);
-			holder.getTextView().setBackgroundDrawable(dr);
-			boolean val3 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
-			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val3, colorint));
-			break;
-		case R.id.item5:
-			colorint = colordrawables[4];
-			dr = getResources().getDrawable(colorint);
-			holder.getTextView().setBackgroundDrawable(dr);
-			boolean val4 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
-			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val4, colorint));
-			break;
-		case R.id.item6:
-			colorint = colordrawables[5];
-			dr = getResources().getDrawable(colorint);
-			holder.getTextView().setBackgroundDrawable(dr);
-			boolean val5 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
-			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val5, colorint));
-			break;
-		case R.id.item7:
-			colorint = colordrawables[6];
-			dr = getResources().getDrawable(colorint);
-			holder.getTextView().setBackgroundDrawable(dr);
-			boolean val6 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
-			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val6, colorint));
-			break;
-		case R.id.item8:
-			
-			for(Map.Entry<String, Person>entry : ((GroepsMaker) getApplication()).gwendolyn.entrySet())
-			{
-				entry.setValue(new Person(entry.getValue().getName(),entry.getValue().isIschecked(),R.drawable.ic_menu_transparentkopie));
-			}
-			
-			Set<String> keys = myadapter.selectedIds.keySet();
-			for (String i : keys)
-			{
-				myadapter.selectedIds.put(i, R.drawable.ic_menu_transparentkopie);
-			}
-			myadapter.changeData(group);
-			break;
-
-		default:
-			return super.onContextItemSelected(item);
-		}
-
-		if (myadapter.selectedIds.containsKey(name))
-		{
-			myadapter.selectedIds.remove(name);
-			myadapter.selectedIds.put(name, colorint);
-		} else
-		{
-			myadapter.selectedIds.put(name, colorint);
-		}
-		boolean val = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
-		((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val, colorint));
-		// myadapter.changeData(data);
-		return true;
-	}
-
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
@@ -551,7 +583,6 @@ public class ListViewActivity extends ListActivity
 	{
 		if (doneflag == true)
 			return;
-		HOWMUCHGROUPS = Integer.parseInt(spinner.getSelectedItem().toString());
 		if (((GroepsMaker) getApplication()).gwendolyn.size() < 1
 				|| (((GroepsMaker) getApplication()).gwendolyn.size() / HOWMUCHGROUPS) < 1)
 		{

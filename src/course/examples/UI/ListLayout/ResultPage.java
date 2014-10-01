@@ -3,31 +3,27 @@ package course.examples.UI.ListLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import course.examples.UI.ListLayout.MyArrayListAdapter.ViewHolder;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.MenuInflater;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
+import course.examples.UI.ListLayout.MyArrayListAdapter.ViewHolder;
 
 public class ResultPage extends ListActivity 
 {
@@ -83,8 +79,8 @@ private String oldstring;
 		img2.setBounds(10,0,48,48);;
 		btnsms.setCompoundDrawables(img2, null, null, null);
 
-		Spinner spin = (Spinner)findViewById(R.id.group_properties_spinner1);
-		spin.setVisibility(View.GONE);
+		Button spinbtn = (Button)findViewById(R.id.group_properties_spinner1);
+		spinbtn.setVisibility(View.GONE);
 		
 		Button btnedit = (Button)findViewById(R.id.button1);
 		btnedit.setOnClickListener(new btneditClickListener());

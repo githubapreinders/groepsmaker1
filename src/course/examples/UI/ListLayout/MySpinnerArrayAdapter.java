@@ -1,14 +1,19 @@
 package course.examples.UI.ListLayout;
 
+import course.examples.UI.ListLayout.MyArrayListAdapter.ViewHolder;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 public class MySpinnerArrayAdapter extends ArrayAdapter<String>
 
@@ -43,15 +48,39 @@ public class MySpinnerArrayAdapter extends ArrayAdapter<String>
 	public View getDropDownView(int position, View convertView, ViewGroup parent)
 	{
 
-		View row = convertView;
+		View mypopupview = convertView;
+		if(mypopupview==null)
+		{
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
+		final PopupWindow pw = new PopupWindow(inflater.inflate(R.layout.popupwindow, null, false),400,600, true);
+		pw.showAtLocation(parent, Gravity.CENTER, 0, 0);
+		mypopupview = pw.getContentView();
+		
+		TextView t0 = (TextView)mypopupview.findViewById(R.id.textViewpopup0);
+		t0.setText(data[position]);
+		final TextView t1 = (TextView)mypopupview.findViewById(R.id.textViewpopup1);
+		t1.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				pw.dismiss();
+			}
+		});
+		}
+		
+		return mypopupview;
+		
+		
+		
+		/**
+		 * View row = convertView;
 		
 		if (row == null)
 		{
 			LayoutInflater inflater = context.getLayoutInflater();
 			row = inflater.inflate(R.layout.spinner_item, parent, false);
 		}
-		//LinearLayout v = (LinearLayout)parent.getParent();
-		//v.setVisibility(View.INVISIBLE);
 		parent.setLayoutParams(new LinearLayout.LayoutParams(400, 450));
 		Drawable dr = context.getResources().getDrawable(R.drawable.group1);
 		parent.setBackgroundDrawable(dr);
@@ -68,6 +97,8 @@ public class MySpinnerArrayAdapter extends ArrayAdapter<String>
 
 		return row;
 
+		 */
+		
 	}
 
 }

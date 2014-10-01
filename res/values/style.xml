@@ -32,4 +32,18 @@
         <item name="android:fadingEdge">horizontal|vertical</item>
     </style>
 
+    <style name="textview_contextmenu_spinner">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:shadowColor">@color/white</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.1</item>
+        <item name="android:fadingEdge">horizontal|vertical</item>
+    </style>
+
 </resources>
