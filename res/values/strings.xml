@@ -58,14 +58,15 @@
     <string name="kies_kleur">Kies kleur</string>
     <string name="groep">Groepssamenstelling</string>
     <string name="kleur0">Klaar</string>
-    <string name="kleur1">1 Samen</string>
+    <string name="kleur1">Samen met...</string>
     <string name="kleur2">2 Samen</string>
     <string name="kleur3">3 Samen</string>
-    <string name="kleur4">1 Apart van&#8230;</string>
+    <string name="kleur4">Apart van…</string>
     <string name="kleur5">2 Apart van&#8230;</string>
     <string name="kleur6">3 Apart van&#8230;</string>
     <string name="kleur7">Geen Kleur</string>
     <string name="kleur8">Alles Donker</string>
     <string name="groepsledentoevoegen">Voeg groepsleden toe of haal ze weg. Gebruik kommas of spaties als scheidingsteken.</string>
+    <string name="opties">Opties</string>
 
 </resources>

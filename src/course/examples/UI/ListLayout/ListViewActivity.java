@@ -3,7 +3,6 @@ package course.examples.UI.ListLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -11,6 +10,7 @@ import java.util.Set;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,7 +20,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.MenuInflater;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,6 +30,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import course.examples.UI.ListLayout.MyArrayListAdapter.ViewHolder;
@@ -37,6 +39,7 @@ import course.examples.UI.ListLayout.MyArrayListAdapter.ViewHolder;
 public class ListViewActivity extends ListActivity
 {
 
+	PopupWindow popup;
 	ListView lv;
 	private final String TAG = "in ListViewActivity";
 	static int escapecounter = 0;
@@ -118,7 +121,6 @@ public class ListViewActivity extends ListActivity
 			{
 				String name = (String) lv.getItemAtPosition(position);
 				int colorint = getColorCodes(name);
-				// mapalt.put(name, new Person(name,false,colorint));
 
 				boolean value = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
 				((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, value, colorint));
@@ -147,10 +149,6 @@ public class ListViewActivity extends ListActivity
 		Button btnGroupProperties = (Button) findViewById(R.id.properties);
 		btnGroupProperties.setOnClickListener(new gotoProperties());
 
-		/**
-		 * layout om namen en groepsnamen nog te editen voordat ze verstuurd
-		 * worden.
-		 */
 		LinearLayout layout = (LinearLayout) findViewById(R.id.edittextlayout);
 		layout.setVisibility(View.GONE);
 	}
@@ -208,14 +206,221 @@ public class ListViewActivity extends ListActivity
 		return returnvalue;
 	}
 
+	
+	
 	@Override
-	public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo)
+	public void onCreateContextMenu(ContextMenu menu, View view, final ContextMenuInfo menuInfo)
 	{
 		super.onCreateContextMenu(menu, view, menuInfo);
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.kleurenkiezer, menu);
+		LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
+		final PopupWindow pw = new PopupWindow(inflater.inflate(R.layout.popupwindow, null, false),400,600, true);
+		pw.showAtLocation(view, Gravity.CENTER, 0, 0);
+		View mypopupview = pw.getContentView();
+		
+		
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
+		final String name = (String) lv.getItemAtPosition(info.position);
+		TextView tv = (TextView) info.targetView;
+		holder = myadapter.new ViewHolder();
+		holder.textView = (TextView) tv;
+		
+		TextView t0 = (TextView)mypopupview.findViewById(R.id.textViewpopup0);
+		t0.setText(name);
+		final TextView t1 = (TextView)mypopupview.findViewById(R.id.textViewpopup1);
+		t1.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				handlepopupWindow(menuInfo, t1.getId());
+				pw.dismiss();
+			}
+		});
+
+		final TextView t2 = (TextView)mypopupview.findViewById(R.id.textViewpopup2);
+		t2.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				handlepopupWindow(menuInfo, t2.getId());
+				pw.dismiss();
+			}
+		});
+		
+		final TextView t3 = (TextView)mypopupview.findViewById(R.id.textViewpopup3);
+		t3.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				handlepopupWindow(menuInfo, t3.getId());
+				pw.dismiss();
+			}
+		});
+		
+		final TextView t4 = (TextView)mypopupview.findViewById(R.id.textViewpopup4);
+		t4.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				handlepopupWindow(menuInfo, t4.getId());
+				pw.dismiss();
+			}
+		});
+		
+		final TextView t5 = (TextView)mypopupview.findViewById(R.id.textViewpopup5);
+		t5.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				handlepopupWindow(menuInfo, t5.getId());
+				pw.dismiss();
+			}
+		});
+		
+		final TextView t6 = (TextView)mypopupview.findViewById(R.id.textViewpopup6);
+		t6.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				handlepopupWindow(menuInfo, t6.getId());
+				pw.dismiss();
+			}
+		});
+		
+		final TextView t7 = (TextView)mypopupview.findViewById(R.id.textViewpopup7);
+		t7.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				handlepopupWindow(menuInfo, t7.getId());
+				pw.dismiss();
+			}
+		});
+		
+		final TextView t8 = (TextView)mypopupview.findViewById(R.id.textViewpopup8);
+		t8.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				handlepopupWindow(menuInfo, t8.getId());
+				pw.dismiss();
+			}
+		});
+		
+		
 	}
 
+	
+	public boolean handlepopupWindow(ContextMenuInfo item, int textviewid)
+	{
+
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item;
+		String name = (String) lv.getItemAtPosition(info.position);
+		int id = (int)info.id;
+		int position = info.position;
+		int colorint = R.drawable.ic_menu_transparentkopie;
+		Drawable dr;
+		TextView tv = (TextView) info.targetView;
+		holder = myadapter.new ViewHolder();
+		holder.textView = (TextView) tv;
+
+		switch (textviewid)
+		{
+		case R.id.textViewpopup2:
+			colorint = colordrawables[0];
+			dr = getResources().getDrawable(colorint);
+			holder.getTextView().setBackgroundDrawable(dr);
+			boolean val = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
+			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val, colorint));
+			break;
+		case R.id.textViewpopup3:
+			colorint = colordrawables[1];
+			dr = getResources().getDrawable(colorint);
+			holder.getTextView().setBackgroundDrawable(dr);
+			boolean val1 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
+			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val1, colorint));
+			break;
+		case R.id.textViewpopup4:
+			colorint = colordrawables[2];
+			dr = getResources().getDrawable(colorint);
+			holder.getTextView().setBackgroundDrawable(dr);
+			boolean val2 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
+			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val2, colorint));
+			break;
+		case R.id.textViewpopup5:
+			colorint = colordrawables[3];
+			dr = getResources().getDrawable(colorint);
+			holder.getTextView().setBackgroundDrawable(dr);
+			boolean val3 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
+			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val3, colorint));
+			break;
+		case R.id.textViewpopup6:
+			colorint = colordrawables[4];
+			dr = getResources().getDrawable(colorint);
+			holder.getTextView().setBackgroundDrawable(dr);
+			boolean val4 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
+			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val4, colorint));
+			break;
+		case R.id.textViewpopup7:
+			colorint = colordrawables[5];
+			dr = getResources().getDrawable(colorint);
+			holder.getTextView().setBackgroundDrawable(dr);
+			boolean val5 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
+			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val5, colorint));
+			break;
+		case R.id.textViewpopup1:
+			colorint = colordrawables[6];
+			dr = getResources().getDrawable(colorint);
+			holder.getTextView().setBackgroundDrawable(dr);
+			boolean val6 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
+			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val6, colorint));
+			break;
+		case R.id.textViewpopup8:
+			
+			for(Map.Entry<String, Person>entry : ((GroepsMaker) getApplication()).gwendolyn.entrySet())
+			{
+				entry.setValue(new Person(entry.getValue().getName(),entry.getValue().isIschecked(),R.drawable.ic_menu_transparentkopie));
+			}
+			
+			Set<String> keys = myadapter.selectedIds.keySet();
+			for (String i : keys)
+			{
+				myadapter.selectedIds.put(i, R.drawable.ic_menu_transparentkopie);
+			}
+			myadapter.changeData(group);
+			break;
+
+		default:
+			return true;
+		}
+
+		if (myadapter.selectedIds.containsKey(name))
+		{
+			myadapter.selectedIds.remove(name);
+			myadapter.selectedIds.put(name, colorint);
+		} else
+		{
+			myadapter.selectedIds.put(name, colorint);
+		}
+		boolean val = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
+		((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val, colorint));
+		// myadapter.changeData(data);
+		return true;
+	}
+
+	
+	
+	
+	
+	
+	
 	/**
 	 * gebruiker kiest een kleur uit het contextmenu en wordt gezet als
 	 * achtergrondkleur van het lijstitem waarop werd geklikt. kleur wordt in de

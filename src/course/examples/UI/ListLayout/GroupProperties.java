@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Switch;
 
 public class GroupProperties extends ListActivity
 
@@ -43,8 +42,7 @@ public class GroupProperties extends ListActivity
 		linearlayout.setVisibility(View.GONE);
 		lv = getListView();
 		group = new ArrayList<Person>();
-		for (Map.Entry<String, Person> m : ((GroepsMaker) getApplication()).gwendolyn
-				.entrySet())
+		for (Map.Entry<String, Person> m : ((GroepsMaker) getApplication()).gwendolyn.entrySet())
 		{
 			group.add(m.getValue());
 		}
@@ -66,6 +64,8 @@ public class GroupProperties extends ListActivity
 			@Override
 			public void onClick(View v)
 			{
+				InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(edit1.getWindowToken(), 0);
 				splitsGroup();
 
 			}
@@ -94,8 +94,7 @@ public class GroupProperties extends ListActivity
 			splitsGroup.setText(R.string.namen);
 			updateHashMap();
 			group.clear();
-			for (Map.Entry<String, Person> p : ((GroepsMaker) getApplication())
-					.getGwendolyn().entrySet())
+			for (Map.Entry<String, Person> p : ((GroepsMaker) getApplication()).getGwendolyn().entrySet())
 			{
 				group.add(p.getValue());
 			}
@@ -115,16 +114,13 @@ public class GroupProperties extends ListActivity
 		}
 
 		String tostorestring = "";
-		for (Map.Entry<String, Person> p : ((GroepsMaker) getApplication())
-				.getGwendolyn().entrySet())
+		for (Map.Entry<String, Person> p : ((GroepsMaker) getApplication()).getGwendolyn().entrySet())
 		{
-			tostorestring += p.getValue().getName() + " "
-					+ p.getValue().isIschecked() + " "
+			tostorestring += p.getValue().getName() + " " + p.getValue().isIschecked() + " "
 					+ p.getValue().getColorvalue() + " ";
 		}
 
-		SharedPreferences.Editor prefseditor = getSharedPreferences(
-				"storednames1", MODE_PRIVATE).edit();
+		SharedPreferences.Editor prefseditor = getSharedPreferences("storednames1", MODE_PRIVATE).edit();
 		prefseditor.putString("storednames1", tostorestring);
 		prefseditor.commit();
 		Intent intent = new Intent(GroupProperties.this, ListViewActivity.class);
@@ -136,8 +132,7 @@ public class GroupProperties extends ListActivity
 	{
 		String outputstring = "";
 
-		for (Map.Entry<String, Person> m : ((GroepsMaker) getApplication()).gwendolyn
-				.entrySet())
+		for (Map.Entry<String, Person> m : ((GroepsMaker) getApplication()).gwendolyn.entrySet())
 		{
 			outputstring += m.getKey() + " ";
 		}
@@ -145,7 +140,7 @@ public class GroupProperties extends ListActivity
 		return outputstring;
 	}
 
-	//converts the text in the textbox to an array of names
+	// converts the text in the textbox to an array of names
 	public String[] makegrouplist(String textboxstring)
 	{
 		String[] string = textboxstring.split("[\\s+,\\s+]");
@@ -169,7 +164,7 @@ public class GroupProperties extends ListActivity
 
 	}
 
-	//standard code for getting capital letters at the correct position
+	// standard code for getting capital letters at the correct position
 	public String correctName(String name)
 	{
 		ArrayList<Integer> capitalindexes = new ArrayList<Integer>();
@@ -192,20 +187,19 @@ public class GroupProperties extends ListActivity
 
 	public void updateHashMap()
 	{
-		//adding new entries on the basis of user textboxinput, deleting old ones and preserving the ones that were already there
+		// adding new entries on the basis of user textboxinput, deleting old
+		// ones and preserving the ones that were already there
 		String[] grouparray = makegrouplist(edit1.getText().toString());
 
 		for (String s : grouparray)
 		{
 			if (!((GroepsMaker) getApplication()).gwendolyn.containsKey(s))
 			{
-				((GroepsMaker) getApplication()).gwendolyn.put(s, new Person(s,
-						false, R.drawable.ic_menu_transparent));
+				((GroepsMaker) getApplication()).gwendolyn.put(s, new Person(s, false, R.drawable.ic_menu_transparent));
 			}
 		}
 		ArrayList<String> helper = new ArrayList<String>();
-		for (Map.Entry<String, Person> p : ((GroepsMaker) getApplication())
-				.getGwendolyn().entrySet())
+		for (Map.Entry<String, Person> p : ((GroepsMaker) getApplication()).getGwendolyn().entrySet())
 		{
 			boolean remove = true;
 			for (String s : grouparray)
@@ -224,21 +218,10 @@ public class GroupProperties extends ListActivity
 		{
 			((GroepsMaker) getApplication()).getGwendolyn().remove(s);
 		}
-		
-		//updating the adapter
+
+		// updating the adapter
 		ArrayList<Person> helper2 = new ArrayList<Person>(((GroepsMaker) getApplication()).getGwendolyn().values());
 		myadapter.changeData(helper2);
 
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

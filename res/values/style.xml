@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
+
     <style name="button">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">50dp</item>
@@ -11,5 +12,24 @@
         <item name="android:textStyle">bold</item>
         <item name="android:fadingEdge">horizontal|vertical</item>
     </style>
-    
+
+    <style name="BlueTheme">
+        <item name="android:background">#B0E0E6</item>
+        <item name="android:textColor">#334455</item>
+        <item name="android:popupBackground">#cdef11</item>
+    </style>
+
+    <style name="textview_contextmenu">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:shadowColor">@color/white</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">0.1</item>
+        <item name="android:fadingEdge">horizontal|vertical</item>
+    </style>
+
 </resources>

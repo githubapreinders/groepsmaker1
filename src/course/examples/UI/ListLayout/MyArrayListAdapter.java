@@ -104,12 +104,18 @@ public class MyArrayListAdapter extends ArrayAdapter<String>
 				{
 					textview.setBackgroundDrawable(img1);
 					textview.setPadding(0, 10, 0, 0);
+					textview.setText(item);
+					return convertView;
 				}
-
 			}
 			if (context instanceof ListViewActivity)
 			{
 				Drawable dr = context.getResources().getDrawable(gwendolyn.get(item).getColorvalue());
+				textview.setBackgroundDrawable(dr);
+			}
+			if(context instanceof ResultPage)
+			{
+				Drawable dr = context.getResources().getDrawable(R.drawable.ic_menu_transparentkopie);
 				textview.setBackgroundDrawable(dr);
 			}
 

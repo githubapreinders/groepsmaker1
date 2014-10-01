@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layerlist_white_container_and_image"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:paddingTop="5dp" >
+
+    <TextView
+        android:id="@+id/textViewpopup0"
+        style="@style/textview_contextmenu"
+        android:text="@string/opties"
+        android:textSize="25sp"
+        android:gravity="center|left"
+        />
+
+    <TextView
+        android:id="@+id/textViewpopup1"
+        style="@style/textview_contextmenu"
+        android:background="@drawable/ic_menu_transparentkopie"
+        android:text="@string/kleur7" />
+
+    
+<TextView
+        android:id="@+id/textViewpopup2"
+        style="@style/textview_contextmenu"
+        android:background="@drawable/ic_menu_green1kopie"
+        android:text="@string/kleur1" />
+
+    <TextView
+        android:id="@+id/textViewpopup3"
+        style="@style/textview_contextmenu"
+        android:background="@drawable/ic_menu_green2kopie"
+        android:text="@string/kleur1" />
+
+    <TextView
+        android:id="@+id/textViewpopup4"
+        style="@style/textview_contextmenu"
+        android:background="@drawable/ic_menu_green3kopie"
+        android:text="@string/kleur1" />
+
+    <TextView
+        android:id="@+id/textViewpopup5"
+        style="@style/textview_contextmenu"
+        android:background="@drawable/ic_menu_red1kopie"
+        android:text="@string/kleur4" />
+
+    <TextView
+        android:id="@+id/textViewpopup6"
+        style="@style/textview_contextmenu"
+        android:background="@drawable/ic_menu_red2kopie"
+        android:text="@string/kleur4" />
+
+    <TextView
+        android:id="@+id/textViewpopup7"
+        style="@style/textview_contextmenu"
+        android:background="@drawable/ic_menu_red3kopie"
+        android:text="@string/kleur4" />
+
+    <TextView
+        android:id="@+id/textViewpopup8"
+        style="@style/textview_contextmenu"
+        android:background="@drawable/ic_menu_transparentkopie"
+        android:text="@string/kleur8" />
+
+</LinearLayout>

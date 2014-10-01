@@ -54,9 +54,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/result_page_dark_gradient"
-        android:orientation="horizontal" 
-        android:padding="5dp"
-        >
+        android:baselineAligned="true"
+        android:orientation="horizontal"
+        android:padding="4dp"
+         >
 
         <Button
             android:id="@+id/verdeel"
@@ -68,13 +69,15 @@
 
         <Spinner
             android:id="@+id/group_properties_spinner1"
-            android:layout_height="50dp"
             android:layout_width="50dp"
-            android:padding="0dp"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
             android:layout_weight="1"
             android:background="@drawable/btn_spinner"
-            android:prompt="@string/aantalgroepen"
-            />
+            android:padding="0dp"
+            android:prompt="@string/howmuch_subgroups"
+            android:popupBackground="#ff223344"
+			/>
 
         <Button
             android:id="@+id/properties"

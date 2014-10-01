@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
+    
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/textView_spinner"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:layout_gravity="center"
         android:paddingLeft="20dp"
-	    android:background="@drawable/ic_menu_green2kopie"
+        android:textColor="@android:color/black"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
