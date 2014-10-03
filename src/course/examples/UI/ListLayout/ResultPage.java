@@ -116,7 +116,8 @@ private String oldstring;
 			ContextMenuInfo menuInfo) 
 	{
 		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-		String invokingitem = ((TextView)info.targetView).getText().toString() ;
+		LinearLayout ll = (LinearLayout)info.targetView;
+		String invokingitem = ((TextView)ll.getChildAt(0)).getText().toString() ;
 		String item1 = getResources().getString(R.string.naam_wijzigen);
 	    String item2 = getResources().getString(R.string.verplaatsen_naar);
 	    String item3 = getResources().getString(R.string.verwijderen);

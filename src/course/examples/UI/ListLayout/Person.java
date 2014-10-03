@@ -2,10 +2,10 @@ package course.examples.UI.ListLayout;
 
 public class Person implements Comparable<Person>
 {
-	public int[] colordrawables = { R.drawable.ic_menu_green1kopie,
-			R.drawable.ic_menu_green2kopie, R.drawable.ic_menu_green3kopie,
-			R.drawable.ic_menu_red1kopie, R.drawable.ic_menu_red2kopie,
-			R.drawable.ic_menu_red3kopie, R.drawable.ic_menu_transparentkopie };
+	public int[] colordrawables = { R.drawable.green1,
+			R.drawable.green2, R.drawable.green3,
+			R.drawable.red1, R.drawable.red2,
+			R.drawable.red3, R.drawable.transparentkopie };
 	public Integer GREEN1 = colordrawables[0];
 	public Integer GREEN2 = colordrawables[1];
 	public Integer GREEN3 = colordrawables[2];

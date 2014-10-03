@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
+    >
+<TextView 
     android:id="@+id/listitem"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:shadowColor="@android:color/black"
+    android:gravity="left"
     android:shadowDx="1"
     android:shadowDy="1"
     android:shadowRadius="0.1"
     android:textSize="24sp" 
     android:textStyle="bold"
     android:paddingLeft="15dp"
+    android:paddingBottom="3dp"
+    android:layout_marginStart="15dp"
     />
-
+</LinearLayout>

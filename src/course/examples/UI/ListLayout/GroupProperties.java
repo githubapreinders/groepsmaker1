@@ -195,7 +195,7 @@ public class GroupProperties extends ListActivity
 		{
 			if (!((GroepsMaker) getApplication()).gwendolyn.containsKey(s))
 			{
-				((GroepsMaker) getApplication()).gwendolyn.put(s, new Person(s, false, R.drawable.ic_menu_transparent));
+				((GroepsMaker) getApplication()).gwendolyn.put(s, new Person(s, false, R.drawable.transparentkopie));
 			}
 		}
 		ArrayList<String> helper = new ArrayList<String>();

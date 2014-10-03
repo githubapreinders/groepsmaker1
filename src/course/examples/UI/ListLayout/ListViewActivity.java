@@ -67,8 +67,8 @@ public class ListViewActivity extends ListActivity
 	public Integer RED3;
 	public Integer BLACK;
 	public int SUBGROUPSIZE;
-	public int[] colordrawables = { R.drawable.ic_menu_green1kopie, R.drawable.ic_menu_green2kopie, R.drawable.ic_menu_green3kopie,
-			R.drawable.ic_menu_red1kopie, R.drawable.ic_menu_red2kopie, R.drawable.ic_menu_red3kopie, R.drawable.ic_menu_transparentkopie };
+	public int[] colordrawables = { R.drawable.green1, R.drawable.green2, R.drawable.green3,
+			R.drawable.red1, R.drawable.red2, R.drawable.red3, R.drawable.transparentkopie };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -103,7 +103,7 @@ public class ListViewActivity extends ListActivity
 		for (String s : group)
 		{
 			int color = ((GroepsMaker) getApplication()).gwendolyn.get(s).getColorvalue();
-			if (color != R.drawable.ic_menu_transparentkopie)
+			if (color != R.drawable.transparentkopie)
 			{
 				myadapter.selectedIds.put(s, color);
 				counter++;
@@ -130,6 +130,7 @@ public class ListViewActivity extends ListActivity
 
 				holder = (ViewHolder) view.getTag();
 				holder.textView.setBackgroundDrawable(getResources().getDrawable(colorint));
+				holder.textView.setPadding(15, 0, 0, 4);
 				if (myadapter.selectedIds.containsKey(name))
 				{
 					myadapter.selectedIds.remove(name);
@@ -356,7 +357,9 @@ public class ListViewActivity extends ListActivity
 		
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
 		final String name = (String) lv.getItemAtPosition(info.position);
-		TextView tv = (TextView) info.targetView;
+		LinearLayout ll = (LinearLayout)info.targetView;
+		
+		TextView tv = (TextView) ll.getChildAt(0);
 		holder = myadapter.new ViewHolder();
 		holder.textView = (TextView) tv;
 		
@@ -466,9 +469,10 @@ public class ListViewActivity extends ListActivity
 		String name = (String) lv.getItemAtPosition(info.position);
 		int id = (int)info.id;
 		int position = info.position;
-		int colorint = R.drawable.ic_menu_transparentkopie;
+		int colorint = R.drawable.transparentkopie;
 		Drawable dr;
-		TextView tv = (TextView) info.targetView;
+		LinearLayout ll = (LinearLayout)info.targetView;
+		TextView tv = (TextView)ll.getChildAt(0);
 		holder = myadapter.new ViewHolder();
 		holder.textView = (TextView) tv;
 
@@ -478,6 +482,7 @@ public class ListViewActivity extends ListActivity
 			colorint = colordrawables[0];
 			dr = getResources().getDrawable(colorint);
 			holder.getTextView().setBackgroundDrawable(dr);
+			holder.getTextView().setPadding(15, 0, 0, 4);
 			boolean val = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
 			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val, colorint));
 			break;
@@ -485,6 +490,7 @@ public class ListViewActivity extends ListActivity
 			colorint = colordrawables[1];
 			dr = getResources().getDrawable(colorint);
 			holder.getTextView().setBackgroundDrawable(dr);
+			holder.getTextView().setPadding(15, 0, 0, 4);
 			boolean val1 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
 			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val1, colorint));
 			break;
@@ -492,6 +498,7 @@ public class ListViewActivity extends ListActivity
 			colorint = colordrawables[2];
 			dr = getResources().getDrawable(colorint);
 			holder.getTextView().setBackgroundDrawable(dr);
+			holder.getTextView().setPadding(15, 0, 0, 4);
 			boolean val2 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
 			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val2, colorint));
 			break;
@@ -499,6 +506,7 @@ public class ListViewActivity extends ListActivity
 			colorint = colordrawables[3];
 			dr = getResources().getDrawable(colorint);
 			holder.getTextView().setBackgroundDrawable(dr);
+			holder.getTextView().setPadding(15, 0, 0, 4);
 			boolean val3 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
 			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val3, colorint));
 			break;
@@ -506,6 +514,7 @@ public class ListViewActivity extends ListActivity
 			colorint = colordrawables[4];
 			dr = getResources().getDrawable(colorint);
 			holder.getTextView().setBackgroundDrawable(dr);
+			holder.getTextView().setPadding(15, 0, 0, 4);
 			boolean val4 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
 			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val4, colorint));
 			break;
@@ -513,6 +522,7 @@ public class ListViewActivity extends ListActivity
 			colorint = colordrawables[5];
 			dr = getResources().getDrawable(colorint);
 			holder.getTextView().setBackgroundDrawable(dr);
+			holder.getTextView().setPadding(15, 0, 0, 4);
 			boolean val5 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
 			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val5, colorint));
 			break;
@@ -520,6 +530,7 @@ public class ListViewActivity extends ListActivity
 			colorint = colordrawables[6];
 			dr = getResources().getDrawable(colorint);
 			holder.getTextView().setBackgroundDrawable(dr);
+			holder.getTextView().setPadding(15, 0, 0, 4);
 			boolean val6 = ((GroepsMaker) getApplication()).gwendolyn.get(name).isIschecked();
 			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val6, colorint));
 			break;
@@ -527,13 +538,13 @@ public class ListViewActivity extends ListActivity
 			
 			for(Map.Entry<String, Person>entry : ((GroepsMaker) getApplication()).gwendolyn.entrySet())
 			{
-				entry.setValue(new Person(entry.getValue().getName(),entry.getValue().isIschecked(),R.drawable.ic_menu_transparentkopie));
+				entry.setValue(new Person(entry.getValue().getName(),entry.getValue().isIschecked(),R.drawable.transparentkopie));
 			}
 			
 			Set<String> keys = myadapter.selectedIds.keySet();
 			for (String i : keys)
 			{
-				myadapter.selectedIds.put(i, R.drawable.ic_menu_transparentkopie);
+				myadapter.selectedIds.put(i, R.drawable.transparentkopie);
 			}
 			myadapter.changeData(group);
 			break;
@@ -610,7 +621,6 @@ public class ListViewActivity extends ListActivity
 		ArrayList<Person> schonelei = new ArrayList<Person>();
 		for (Map.Entry<String, Person> entry : ((GroepsMaker) getApplication()).gwendolyn.entrySet())
 		{
-			// schonelei.add(new GroupMember(entry.getKey(),entry.getValue()));
 			schonelei.add(entry.getValue());
 		}
 
@@ -631,6 +641,7 @@ public class ListViewActivity extends ListActivity
 		do
 		{
 			int redcounter = 0;
+			int howmuchreds=0;
 			boolean flag = false;
 			int indexgreen = 100;
 			int color = schonelei.get(schonelei.size() - 1).getColorvalue();
@@ -666,8 +677,9 @@ public class ListViewActivity extends ListActivity
 					}
 
 					schoneleisubs.get(redcounter).addPerson(person);
+					howmuchreds++;
 					schonelei.remove(person);
-					if (schoneleisubs.get(redcounter).getSize() > MAXSUBGROUPSIZE)
+					if (howmuchreds>HOWMUCHGROUPS||schoneleisubs.get(redcounter).getSize() > MAXSUBGROUPSIZE)
 					{
 						showAlertDialogInvalidConfigs();
 						return;
@@ -692,7 +704,7 @@ public class ListViewActivity extends ListActivity
 			helper.clear();
 		} while (schonelei.size() > 0);
 
-		// check for invalid configs
+		// check for invalid configs; we try 10 times to make a partition, after that we give the user a dialog to change his config
 		for (SubGroup sg : schoneleisubs)
 		{
 			if (sg.getSize() > MAXSUBGROUPSIZE || sg.getSize() < SUBGROUPSIZE)
@@ -709,33 +721,60 @@ public class ListViewActivity extends ListActivity
 			}
 		}
 		escapecounter = 0;
-
-		// prepare a string for the resultpage
-		int groupnumber = 0;
-		int memberindex = 0;
-		String[] resultgroups = new String[GROUPSIZE + HOWMUCHGROUPS];
-
-		for (int index1 = 0; index1 < resultgroups.length; index1++)
+		//sort the subgroups alphabeticaly and prepare an array with strings to put in the intent.
+		ArrayList<String>helper4 = new ArrayList<String>();
+		int groupnum =0;
+		for(SubGroup s : schoneleisubs)
 		{
-
-			if (memberindex == 0)
+			ArrayList<String> helper3 = new ArrayList<String>();
+			for(Person p : s.getPersons())
 			{
-				resultgroups[index1] = "Groep" + (String.valueOf(groupnumber + 1));
-				memberindex++;
-			} else
-			{
-				resultgroups[index1] = schoneleisubs.get(groupnumber).getPersons().get(memberindex - 1).getName();
-				memberindex++;
-				if (memberindex == schoneleisubs.get(groupnumber).getSize() + 1)
-				{
-					memberindex = 0;
-					groupnumber++;
-				}
+				helper3.add(p.getName());
 			}
+			Collections.sort(helper3);
+			helper4.add(getResources().getString(R.string.groep1) + " " + String.valueOf(groupnum + 1));
+			for(String str : helper3)
+			{
+				helper4.add(str);
+			}
+			groupnum++;
 		}
+		String[] resultgr = new String[GROUPSIZE + HOWMUCHGROUPS];
+		int index2=0;
+		for(String s1 : helper4)
+		{
+			resultgr[index2]=s1;
+			index2++;
+		}
+
+		
+		
+		// prepare a string for the resultpage
+//		int groupnumber = 0;
+//		int memberindex = 0;
+//		String[] resultgroups = new String[GROUPSIZE + HOWMUCHGROUPS];
+//
+//		for (int index1 = 0; index1 < resultgroups.length; index1++)
+//		{
+//
+//			if (memberindex == 0)
+//			{
+//				resultgroups[index1] = "Groep" + (String.valueOf(groupnumber + 1));
+//				memberindex++;
+//			} else
+//			{
+//				resultgroups[index1] = schoneleisubs.get(groupnumber).getPersons().get(memberindex - 1).getName();
+//				memberindex++;
+//				if (memberindex == schoneleisubs.get(groupnumber).getSize() + 1)
+//				{
+//					memberindex = 0;
+//					groupnumber++;
+//				}
+//			}
+//		}
 		saveToSharedPrefs();
 		Intent intent = new Intent(ListViewActivity.this, ResultPage.class);
-		intent.putExtra("groupings", resultgroups);
+		intent.putExtra("groupings", resultgr);
 		intent.putExtra("howmuchgroups", HOWMUCHGROUPS);
 		startActivity(intent);
 		doneflag = true;
@@ -802,239 +841,7 @@ public class ListViewActivity extends ListActivity
 		return listofsmallests.get(ran.nextInt(listofsmallests.size()));
 	}
 
-	public void makeSubGroups()
-	{
-		if (doneflag == true)
-			return;
-		HOWMUCHGROUPS = Integer.parseInt(spinner.getSelectedItem().toString());
-		if (((GroepsMaker) getApplication()).gwendolyn.size() < 1
-				|| (((GroepsMaker) getApplication()).gwendolyn.size() / HOWMUCHGROUPS) < 1)
-		{
-			showAlertDialogNogroupmembers();
-			return;
-		}
-
-		GREEN1 = colordrawables[0];
-		GREEN2 = colordrawables[1];
-		GREEN3 = colordrawables[2];
-		RED1 = colordrawables[3];
-		RED2 = colordrawables[4];
-		RED3 = colordrawables[5];
-		BLACK = colordrawables[6];
-		final int GROUPSIZE = ((GroepsMaker) getApplication()).gwendolyn.size();
-		SUBGROUPSIZE = GROUPSIZE / HOWMUCHGROUPS;
-		int MAXSUBGROUPSIZE = SUBGROUPSIZE;
-		if (GROUPSIZE % HOWMUCHGROUPS > 0)
-		{
-			MAXSUBGROUPSIZE++;
-		}
-
-		Log.i(TAG, "groupsize: " + GROUPSIZE + " subgroupsize: " + MAXSUBGROUPSIZE);
-
-		ArrayList<Person> schonelei = new ArrayList<Person>();
-		for (Map.Entry<String, Person> entry : ((GroepsMaker) getApplication()).gwendolyn.entrySet())
-		{
-			// schonelei.add(new GroupMember(entry.getKey(),entry.getValue()));
-			schonelei.add(entry.getValue());
-		}
-
-		Collections.sort(schonelei);
-
-		// check for impossible color preferences
-		boolean validconfig = checkforValidConfig(schonelei);
-		if (!(validconfig))
-		{
-			showAlertDialogInvalidConfigs();
-			return;
-		}
-
-		// make a list with empty subgroups
-		ArrayList<SubGroup> schoneleisubs = new ArrayList<SubGroup>();
-		for (int i = 0; i < HOWMUCHGROUPS; i++)
-		{
-			schoneleisubs.add(new SubGroup());
-		}
-
-		// choose a random item from the subgroupmap until is is a red or a
-		// green one ; all the colors
-		// will be put in subgroups first, the rest will be distributed later
-		// among the subgroups
-		int pointer1 = 0;
-		boolean colorspresent = false;
-		for (Person m : schonelei)
-		{
-			if (!(m.getColorvalue() == (BLACK)))
-			{
-				colorspresent = true;
-				break;
-			}
-		}
-
-		while (colorspresent)
-		{
-
-			Integer value = BLACK;
-			while (value.equals(BLACK))
-			{
-				Random random = new Random();
-				value = schonelei.get(random.nextInt(schonelei.size())).getColorvalue();
-			}
-			// Group the red choices and put them in different groups
-			if (value.equals(RED1) || value.equals(RED2) || value.equals(RED3))
-			{
-				ArrayList<Integer> helper = new ArrayList<Integer>();
-				for (Person m : schonelei)
-				{
-					if (m.getColorvalue() == (value))
-					{
-						schoneleisubs.get(pointer1).addPerson(m);
-						int index = schonelei.indexOf(m);
-						helper.add(index);
-						pointer1++;
-						if (pointer1 == schoneleisubs.size())
-						{
-							pointer1 = 0;
-						}
-					}
-				}
-				Collections.sort(helper, Collections.reverseOrder());
-				for (int i = 0; i < helper.size(); i++)
-				{
-					schonelei.remove((int) helper.get(i));
-				}
-			}
-			// Group green choices and put them if pos in the same group
-			if (value.equals(GREEN1) || value.equals(GREEN2) || value.equals(GREEN3))
-			{
-				ArrayList<Integer> helper = new ArrayList<Integer>();
-				SubGroup sg = new SubGroup();
-				int counter = 0;
-				for (Person m : schonelei)
-				{
-					if (m.getColorvalue() == (value))
-					{
-						sg.addPerson(m);
-						int index = schonelei.indexOf(m);
-						helper.add(index);
-						counter++;
-					}
-				}
-				// determine the smallest subgroup
-				int parking = 0;
-				for (int i = 0; i < HOWMUCHGROUPS - 1; i++)
-				{
-					if (schoneleisubs.get(i).getSize() > schoneleisubs.get(i + 1).getSize())
-					{
-						parking = i + 1;
-					}
-				}
-				// put green members together in the smalles available subgroup
-				for (int i = 0; i < counter; i++)
-				{
-					schoneleisubs.get(parking).addPerson(sg.getPersons().get(i));
-				}
-				Collections.sort(helper, Collections.reverseOrder());
-				for (int i = 0; i < helper.size(); i++)
-				{
-					schonelei.remove((int) helper.get(i));
-				}
-
-			}
-			// check if still colors are present in the arraylist
-			colorspresent = false;
-			for (Person m : schonelei)
-			{
-				if (!(m.getColorvalue() == (BLACK)))
-				{
-					colorspresent = true;
-					break;
-				}
-
-			}
-
-		}
-		// distribute the rest of the persons over the remaining space
-		// DONE remaining members have to be distributed evenly
-		if (schonelei.size() > 0)
-		{
-			Collections.shuffle(schonelei);
-			int index = 0;
-			int index2 = 0;
-			for (Person m : schonelei)
-			{
-				boolean given = false;
-				do
-				{
-					int x = getSmallestAvailableSubgroup(schoneleisubs);
-
-					if (index < (HOWMUCHGROUPS))
-					{
-						if (schoneleisubs.get(index).getSize() < SUBGROUPSIZE)
-						{
-							schoneleisubs.get(index).addPerson(m);
-							given = true;
-						} else
-						{
-							index++;
-						}
-					} else
-					{
-						schoneleisubs.get(index2).addPerson(m);
-						given = true;
-						index2++;
-					}
-				} while (!given);
-			}
-
-		}
-		// check for subgroupsizeifferences > 1
-		for (SubGroup sg : schoneleisubs)
-		{
-			if (sg.getSize() > MAXSUBGROUPSIZE)
-			{
-				escapecounter++;
-				schoneleisubs.clear();
-				makeSubGroups();
-				if (escapecounter == 11)
-				{
-					showAlertDialogInvalidConfigs();
-					return;
-				}
-				return;
-			}
-		}
-		escapecounter = 0;
-		int groupnumber = 0;
-		int memberindex = 0;
-		String[] resultgroups = new String[GROUPSIZE + HOWMUCHGROUPS];
-
-		for (int index1 = 0; index1 < resultgroups.length; index1++)
-		{
-
-			if (memberindex == 0)
-			{
-				resultgroups[index1] = "Groep" + (String.valueOf(groupnumber + 1));
-				memberindex++;
-			} else
-			{
-				resultgroups[index1] = schoneleisubs.get(groupnumber).getPersons().get(memberindex - 1).getName();
-				memberindex++;
-				if (memberindex == schoneleisubs.get(groupnumber).getSize() + 1)
-				{
-					memberindex = 0;
-					groupnumber++;
-				}
-			}
-		}
-		saveToSharedPrefs();
-		Intent intent = new Intent(ListViewActivity.this, ResultPage.class);
-		intent.putExtra("groupings", resultgroups);
-		intent.putExtra("howmuchgroups", HOWMUCHGROUPS);
-		startActivity(intent);
-		doneflag = true;
-
-	}
-
+	
 	public void saveToSharedPrefs()
 	{
 		String tostorestring = "";

@@ -1,6 +1,7 @@
 package course.examples.UI.ListLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import android.app.ActionBar.LayoutParams;
@@ -9,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,15 +35,19 @@ public class MyArrayListAdapter extends ArrayAdapter<String>
 			ArrayList<String> group)
 	{
 		super(context, textViewResourceId, group);
-		this.group = group;
 		this.context = context;
+		this.group = group;
+		if(context instanceof ListViewActivity)
+		{
+			Collections.sort(group);
+		}		
 		this.gwendolyn = new HashMap<String,Person>();
 		this.selectedIds = new HashMap<String, Integer>();
 		this.selectedIds2 = new HashMap<Integer, Integer>();
 		this.groupheadings = new ArrayList<Integer>();
 		for (String str : group)
 		{
-			if (str.length() > 5 && str.substring(0, 5).equals("Groep"))
+			if (str.length() > 5 && str.substring(0, 5).equals(context.getResources().getString(R.string.groep1)))
 			{
 				groupheadings.add(group.indexOf(str));
 			}
@@ -53,6 +59,10 @@ public class MyArrayListAdapter extends ArrayAdapter<String>
 
 	public void changeData(ArrayList<String> data)
 	{
+		if(context instanceof ListViewActivity)
+		{
+			Collections.sort(data);
+		}
 		this.group = data;
 		notifyDataSetChanged();
 	}
@@ -103,7 +113,7 @@ public class MyArrayListAdapter extends ArrayAdapter<String>
 				if (i == position)
 				{
 					textview.setBackgroundDrawable(img1);
-					textview.setPadding(0, 10, 0, 0);
+					textview.setPadding(15, 10, 0, 0);
 					textview.setText(item);
 					return convertView;
 				}
@@ -112,24 +122,27 @@ public class MyArrayListAdapter extends ArrayAdapter<String>
 			{
 				Drawable dr = context.getResources().getDrawable(gwendolyn.get(item).getColorvalue());
 				textview.setBackgroundDrawable(dr);
+				textview.setPadding(15, 0, 0, 4);
 			}
 			if(context instanceof ResultPage)
 			{
-				Drawable dr = context.getResources().getDrawable(R.drawable.ic_menu_transparentkopie);
+				Drawable dr = context.getResources().getDrawable(R.drawable.transparentkopie);
 				textview.setBackgroundDrawable(dr);
+				textview.setPadding(15, 0, 0, 4);
 			}
 
 		} else
 		{
 			ViewHolder holder = (ViewHolder) convertView.getTag();
 			textview = holder.getTextView();
-			textview.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.ic_menu_transparentkopie));
-			textview.setPadding(20, 0, 0, 0);
+			textview.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.transparentkopie));
+			textview.setPadding(15, 0, 0, 4);
 			if (selectedIds.containsKey(item))
 			{
 				Drawable dr = context.getResources().getDrawable(
 						selectedIds.get(item));
 				textview.setBackgroundDrawable(dr);
+				textview.setPadding(15, 0, 0, 4);
 			}
 
 			for (Integer i : groupheadings)
@@ -137,7 +150,7 @@ public class MyArrayListAdapter extends ArrayAdapter<String>
 				if (i == position)
 				{
 					textview.setBackgroundDrawable(img1);
-					textview.setPadding(0, 10, 0, 0);
+					textview.setPadding(15, 10, 0, 0);
 				}
 			}
 
@@ -148,4 +161,30 @@ public class MyArrayListAdapter extends ArrayAdapter<String>
 		return convertView;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
