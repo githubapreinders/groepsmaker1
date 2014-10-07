@@ -35,10 +35,9 @@
     <string name="verwijderen">Verwijderen</string>
     <string name="sms">SMS</string>
     <string name="share">Share</string>
-        <string name="aantalgroepen">Aantal Groepen</string>
-        <string name="splitstekst">Vink groepsleden aan om ze gelijk te laten verdelen over de subgroepen. Bijv alle jongens, of alle ouderen </string>
-        
-    <string name="namen">Namen&#8230;</string>    
+    <string name="aantalgroepen">aantal groepen</string>
+    <string name="splitstekst">Vink groepsleden aan om ze gelijk te laten verdelen over de subgroepen. Bijv alle jongens, of alle ouderen </string>
+    <string name="namen">Namen&#8230;</string>
     <string name="groep1">Groep</string>
     <string name="groepsleden_toevoegen">Groepsleden toevoegen</string>
     <string name="bewerken">Bewerken</string>
@@ -68,5 +67,12 @@
     <string name="kleur8">Alles Donker</string>
     <string name="groepsledentoevoegen">Voeg groepsleden toe of haal ze weg. Gebruik kommas of spaties als scheidingsteken.</string>
     <string name="opties">Opties</string>
+    <string name="hint_text">Vul een naam in&#8230;</string>
+    <string name="maak_tweetallen">maak tweetallen</string>
+    <string name="maak_drietallen">maak drietallen</string>
+    <string name="maak_viertallen">maak viertallen</string>
+    <string name="andere_verdeling">andere verdeling</string>
+    <string name="aantal_personen">aantal personen</string>
+    <string name="subgroepgrootte">grootte subgroep</string>
 
 </resources>

@@ -3,6 +3,7 @@ package course.examples.UI.ListLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
@@ -22,11 +23,12 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -39,6 +41,10 @@ import course.examples.UI.ListLayout.MyArrayListAdapter.ViewHolder;
 public class ListViewActivity extends ListActivity
 {
 
+	Spinner spin1;
+	Spinner spin2;
+	ArrayList<Integer> spinner1itemsarray;
+	ArrayList<Integer> spinner2itemsarray;
 	PopupWindow popup;
 	ListView lv;
 	Context context;
@@ -48,16 +54,18 @@ public class ListViewActivity extends ListActivity
 	boolean doneflag = false;
 	String storednames;
 	int HOWMUCHGROUPS;
+	int GROUPSIZE;
 	ViewHolder holder;
 	final ArrayList<String> EMPTY = new ArrayList<String>();
 	String[] names;
 	String colorstring = "#667788";
 	HashMap<String, Person> subgroupmap;
-	//HashMap<String,Person> mapalt;
+	// HashMap<String,Person> mapalt;
 	ArrayList<String> group;
 	MyArrayListAdapter myadapter;
 	SharedPreferences prefs;
 	Spinner spinner;
+
 	final int REQUEST_GROUPMEMBERS = 33;
 	public Integer GREEN1;
 	public Integer GREEN2;
@@ -67,8 +75,8 @@ public class ListViewActivity extends ListActivity
 	public Integer RED3;
 	public Integer BLACK;
 	public int SUBGROUPSIZE;
-	public int[] colordrawables = { R.drawable.green1, R.drawable.green2, R.drawable.green3,
-			R.drawable.red1, R.drawable.red2, R.drawable.red3, R.drawable.transparentkopie };
+	public int[] colordrawables = { R.drawable.green1, R.drawable.green2, R.drawable.green3, R.drawable.red1,
+			R.drawable.red2, R.drawable.red3, R.drawable.transparentkopie };
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -76,25 +84,13 @@ public class ListViewActivity extends ListActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.result_page);
 		this.context = getApplicationContext();
-		this.HOWMUCHGROUPS=2;
-		// Een spinner wordt gedefinieerd
-//		spinner = (Spinner) findViewById(R.id.group_properties_spinner1);
-//		//spinner.setBackgroundResource(R.drawable.btn_dropdown_normal);
-//		String[] items = new String[] { "2", "3", "4", "5", "6", "7", "8", "9", "10" };
-//		MySpinnerArrayAdapter adapter = new MySpinnerArrayAdapter(this, android.R.layout.simple_spinner_item, items);
-//		spinner.setAdapter(adapter);
-
-		// groepsnamen en hoeveelheid subgroepjes worden uit de intent gehaald
-		// uit de intentstring worden namen gefilterd(gebruikers mogen namen op
-		// verschillende manieren invoeren, spaties en kommas worden als
-		// scheidingstekens gezien)
+		this.HOWMUCHGROUPS = 2;
+		GROUPSIZE = ((GroepsMaker) getApplication()).gwendolyn.size();
 		group = new ArrayList<String>();
-		//mapalt = new HashMap<String,Person>();
 
 		for (Map.Entry<String, Person> entry : ((GroepsMaker) getApplication()).gwendolyn.entrySet())
 		{
 			group.add(entry.getKey());
-			// mapalt.put(entry.getKey(), entry.getValue());
 		}
 		myadapter = new MyArrayListAdapter(this, R.id.listitem, group);
 		myadapter.gwendolyn = ((GroepsMaker) getApplication()).gwendolyn;
@@ -150,10 +146,10 @@ public class ListViewActivity extends ListActivity
 		Button btnmakesubgroups = (Button) findViewById(R.id.verdeel);
 		btnmakesubgroups.setOnClickListener(new tomakeSubGroups());
 
-		spinnerpopup = (Button)findViewById(R.id.group_properties_spinner1);
+		spinnerpopup = (Button) findViewById(R.id.group_properties_spinner1);
 		spinnerpopup.setOnClickListener(new showSpinnerpopup());
 		spinnerpopup.setText("2");
-		
+
 		Button btnGroupProperties = (Button) findViewById(R.id.properties);
 		btnGroupProperties.setOnClickListener(new gotoProperties());
 
@@ -177,39 +173,42 @@ public class ListViewActivity extends ListActivity
 		@Override
 		public void onClick(View v)
 		{
-			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
-			final PopupWindow pw = new PopupWindow(inflater.inflate(R.layout.popupwindow_spinner, null, false),400,550, true);
+			final LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			final PopupWindow pw = new PopupWindow(inflater.inflate(R.layout.popupwindow_spinner, null, false), 400,
+					550, true);
 			pw.showAtLocation(v.getRootView(), Gravity.CENTER, 0, 25);
 			View mypopupview = pw.getContentView();
-			
-			
-			
-			final TextView t1 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup1);
+
+			final TextView t0 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup0a);
+			t0.setText(getResources().getString(R.string.aantal_personen) + " : " + GROUPSIZE);
+
+			final TextView t1 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup1);
 			t1.setOnClickListener(new View.OnClickListener()
 			{
 				@Override
 				public void onClick(View v)
 				{
+
 					HOWMUCHGROUPS = 2;
 					spinnerpopup.setText("2");
 					pw.dismiss();
 				}
 			});
 
-
-			final TextView t2 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup2);
+			final TextView t2 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup2);
 			t2.setOnClickListener(new View.OnClickListener()
 			{
 				@Override
 				public void onClick(View v)
 				{
+
 					HOWMUCHGROUPS = 3;
 					spinnerpopup.setText("3");
 					pw.dismiss();
 				}
 			});
-			
-			final TextView t3 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup3);
+
+			final TextView t3 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup3);
 			t3.setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -220,8 +219,8 @@ public class ListViewActivity extends ListActivity
 					pw.dismiss();
 				}
 			});
-			
-			final TextView t4 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup4);
+
+			final TextView t4 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup4);
 			t4.setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -232,8 +231,8 @@ public class ListViewActivity extends ListActivity
 					pw.dismiss();
 				}
 			});
-			
-			final TextView t5 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup5);
+
+			final TextView t5 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup5);
 			t5.setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -244,8 +243,8 @@ public class ListViewActivity extends ListActivity
 					pw.dismiss();
 				}
 			});
-			
-			final TextView t6 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup6);
+
+			final TextView t6 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup6);
 			t6.setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -256,8 +255,8 @@ public class ListViewActivity extends ListActivity
 					pw.dismiss();
 				}
 			});
-			
-			final TextView t7 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup7);
+
+			final TextView t7 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup7);
 			t7.setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -268,8 +267,8 @@ public class ListViewActivity extends ListActivity
 					pw.dismiss();
 				}
 			});
-			
-			final TextView t8 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup8);
+
+			final TextView t8 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup8);
 			t8.setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -280,8 +279,8 @@ public class ListViewActivity extends ListActivity
 					pw.dismiss();
 				}
 			});
-			
-			final TextView t9 = (TextView)mypopupview.findViewById(R.id.textViewspinnerpopup9);
+
+			final TextView t9 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup9);
 			t9.setOnClickListener(new View.OnClickListener()
 			{
 				@Override
@@ -292,14 +291,200 @@ public class ListViewActivity extends ListActivity
 					pw.dismiss();
 				}
 			});
-			
+
+			final TextView t10 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup10);
+			t10.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					HOWMUCHGROUPS = 11;
+					spinnerpopup.setText("11");
+					pw.dismiss();
+				}
+			});
+
+			final TextView t11 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup11);
+			t11.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					HOWMUCHGROUPS = GROUPSIZE / 2;
+					spinnerpopup.setText(String.valueOf(GROUPSIZE / 2));
+					pw.dismiss();
+				}
+			});
+
+			final TextView t12 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup12);
+			t12.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					HOWMUCHGROUPS = GROUPSIZE / 3;
+					spinnerpopup.setText(String.valueOf(GROUPSIZE / 3));
+					pw.dismiss();
+				}
+			});
+
+			final TextView t13 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup13);
+			t13.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					HOWMUCHGROUPS = GROUPSIZE / 4;
+					spinnerpopup.setText(String.valueOf(GROUPSIZE / 4));
+					pw.dismiss();
+				}
+			});
+
+			final TextView t14 = (TextView) mypopupview.findViewById(R.id.textViewspinnerpopup14);
+			t14.setOnClickListener(new View.OnClickListener()
+			{
+				@Override
+				public void onClick(View v)
+				{
+					pw.dismiss();
+
+					LayoutInflater inflater2 = getLayoutInflater();
+					final PopupWindow pop = new PopupWindow(inflater2.inflate(R.layout.popupwindow_spinner_submenu,
+							null, false), 400, 550, true);
+					View submenupopup = pop.getContentView();
+					pop.showAtLocation(getListView(), Gravity.CENTER, 0, 0);
+
+					final TextView t14a = (TextView) submenupopup.findViewById(R.id.Spinner_submenu1);
+					t14a.setOnClickListener(new OnClickListener()
+					{
+						@Override
+						public void onClick(View v)
+						{
+							pop.dismiss();
+						}
+					});
+
+					final TextView t14b = (TextView) submenupopup.findViewById(R.id.Spinner_submenu1a);
+					t14b.setText(getResources().getString(R.string.aantal_personen) + " :" + GROUPSIZE);
+
+					spinner1itemsarray = new ArrayList<Integer>();
+					for (int counter = 2; counter < (GROUPSIZE / 2) + 1; counter++)
+					{
+						spinner1itemsarray.add(counter);
 					}
-		
+					spin1 = (Spinner) submenupopup.findViewById(R.id.Spinner_submenu_spinner1);
+					ArrayAdapter<Integer> spin1adapter = new ArrayAdapter<Integer>(ListViewActivity.this,
+							android.R.layout.simple_spinner_item, spinner1itemsarray);
+
+					spin1adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					spin1.setAdapter(spin1adapter);
+					spin1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+					{
+
+						@Override
+						public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+						{
+							Log.d(TAG, "position = " + position + " id= " + id + " aantal groepjes: "
+									+ (int) spinner1itemsarray.get(position));
+							changeSpinnerValues(1, position);
+						}
+
+						@Override
+						public void onNothingSelected(AdapterView<?> parent)
+						{
+							// TODO Auto-generated method stub
+
+						}
+					});
+
+					Set<Integer> spinner2itemsset = new HashSet<Integer>();
+					for (Integer k : spinner1itemsarray)
+					{
+						Integer item = GROUPSIZE / k;
+						spinner2itemsset.add(item);
+					}
+					spinner2itemsarray = new ArrayList<Integer>(spinner2itemsset);
+					Collections.sort(spinner2itemsarray);
+					spin2 = (Spinner) submenupopup.findViewById(R.id.Spinner_submenu_spinner2);
+					ArrayAdapter<Integer> spin2adapter = new ArrayAdapter<Integer>(ListViewActivity.this,
+							android.R.layout.simple_spinner_item, spinner2itemsarray);
+
+					spin2adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					spin2.setAdapter(spin2adapter);
+					spin2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+					{
+
+						@Override
+						public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+						{
+							Log.d(TAG, "position = " + position + " id= " + id + " aantal groepjes: "
+									+ (int) spinner1itemsarray.get(position));
+							changeSpinnerValues(2, position);
+						}
+
+						@Override
+						public void onNothingSelected(AdapterView<?> parent)
+						{
+							// TODO Auto-generated method stub
+
+						}
+					});
+
+					Button btnok = (Button) submenupopup.findViewById(R.id.Spinner_submenu_button);
+					btnok.setOnClickListener(new View.OnClickListener()
+					{
+						@Override
+						public void onClick(View v)
+						{
+							Integer i = (Integer) spin1.getSelectedItem();
+							HOWMUCHGROUPS = (int) i;
+							spinnerpopup.setText(String.valueOf(HOWMUCHGROUPS));
+							pop.dismiss();
+						}
+					});
+				}
+			});
+
+		}
+
 	}
-	
-	
-	
-	
+
+	public void changeSpinnerValues(int SpinnerId, int arrayposition)
+	{
+
+		switch (SpinnerId)
+		{
+		case 1:
+			int helper = GROUPSIZE / (int) spinner1itemsarray.get(arrayposition);
+			int helper2 = -1;
+			for (Integer i : spinner2itemsarray)
+			{
+				if (i == helper)
+				{
+					helper2 = spinner2itemsarray.indexOf(i);
+				}
+			}
+			spin2.setSelection(helper2);
+			break;
+		case 2:
+			int helper3 = GROUPSIZE / (int) spinner2itemsarray.get(arrayposition);
+			int helper4 = -1;
+			for (Integer i : spinner1itemsarray)
+			{
+				if (i == helper3)
+				{
+					helper4 = spinner1itemsarray.indexOf(i);
+				}
+			}
+			spin1.setSelection(helper4);
+
+			break;
+		default:
+			break;
+		}
+
+	}
+
 	/**
 	 * Verandert de dataset in een andere view wanneer er geen data zijn
 	 * (gebruiksaanwijzing) of wanneer er op de contexthelp wordt gedrukt.
@@ -343,29 +528,32 @@ public class ListViewActivity extends ListActivity
 		return returnvalue;
 	}
 
-	
-	//TODO : pile all the separate clickhandlers into one neat private class.
+	public void changeSelectedColorSpinnerPopup(View v)
+	{
+
+	}
+
+	// TODO : pile all the separate clickhandlers into one neat private class.
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View view, final ContextMenuInfo menuInfo)
 	{
 		super.onCreateContextMenu(menu, view, menuInfo);
-		LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
-		final PopupWindow pw = new PopupWindow(inflater.inflate(R.layout.popupwindow, null, false),400,600, true);
+		LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		final PopupWindow pw = new PopupWindow(inflater.inflate(R.layout.popupwindow, null, false), 400, 600, true);
 		pw.showAtLocation(view, Gravity.CENTER, 0, 0);
 		View mypopupview = pw.getContentView();
-		
-		
+
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) menuInfo;
 		final String name = (String) lv.getItemAtPosition(info.position);
-		LinearLayout ll = (LinearLayout)info.targetView;
-		
+
+		LinearLayout ll = (LinearLayout) info.targetView;
 		TextView tv = (TextView) ll.getChildAt(0);
 		holder = myadapter.new ViewHolder();
 		holder.textView = (TextView) tv;
-		
-		TextView t0 = (TextView)mypopupview.findViewById(R.id.textViewpopup0);
+
+		TextView t0 = (TextView) mypopupview.findViewById(R.id.textViewpopup0);
 		t0.setText(name);
-		final TextView t1 = (TextView)mypopupview.findViewById(R.id.textViewpopup1);
+		final TextView t1 = (TextView) mypopupview.findViewById(R.id.textViewpopup1);
 		t1.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -376,7 +564,7 @@ public class ListViewActivity extends ListActivity
 			}
 		});
 
-		final TextView t2 = (TextView)mypopupview.findViewById(R.id.textViewpopup2);
+		final TextView t2 = (TextView) mypopupview.findViewById(R.id.textViewpopup2);
 		t2.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -386,8 +574,8 @@ public class ListViewActivity extends ListActivity
 				pw.dismiss();
 			}
 		});
-		
-		final TextView t3 = (TextView)mypopupview.findViewById(R.id.textViewpopup3);
+
+		final TextView t3 = (TextView) mypopupview.findViewById(R.id.textViewpopup3);
 		t3.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -397,8 +585,8 @@ public class ListViewActivity extends ListActivity
 				pw.dismiss();
 			}
 		});
-		
-		final TextView t4 = (TextView)mypopupview.findViewById(R.id.textViewpopup4);
+
+		final TextView t4 = (TextView) mypopupview.findViewById(R.id.textViewpopup4);
 		t4.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -408,8 +596,8 @@ public class ListViewActivity extends ListActivity
 				pw.dismiss();
 			}
 		});
-		
-		final TextView t5 = (TextView)mypopupview.findViewById(R.id.textViewpopup5);
+
+		final TextView t5 = (TextView) mypopupview.findViewById(R.id.textViewpopup5);
 		t5.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -419,8 +607,8 @@ public class ListViewActivity extends ListActivity
 				pw.dismiss();
 			}
 		});
-		
-		final TextView t6 = (TextView)mypopupview.findViewById(R.id.textViewpopup6);
+
+		final TextView t6 = (TextView) mypopupview.findViewById(R.id.textViewpopup6);
 		t6.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -430,8 +618,8 @@ public class ListViewActivity extends ListActivity
 				pw.dismiss();
 			}
 		});
-		
-		final TextView t7 = (TextView)mypopupview.findViewById(R.id.textViewpopup7);
+
+		final TextView t7 = (TextView) mypopupview.findViewById(R.id.textViewpopup7);
 		t7.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -441,8 +629,8 @@ public class ListViewActivity extends ListActivity
 				pw.dismiss();
 			}
 		});
-		
-		final TextView t8 = (TextView)mypopupview.findViewById(R.id.textViewpopup8);
+
+		final TextView t8 = (TextView) mypopupview.findViewById(R.id.textViewpopup8);
 		t8.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -452,27 +640,25 @@ public class ListViewActivity extends ListActivity
 				pw.dismiss();
 			}
 		});
-		
-		
+
 	}
 
 	/**
-	 * Contextmenu in the form of a popupwindow as an alternative for clicking repeatedly on 
-	 * a listview-item.
+	 * Contextmenu in the form of a popupwindow as an alternative for clicking
+	 * repeatedly on a listview-item.
 	 */
-	
-	
+
 	public boolean handlepopupWindow(ContextMenuInfo item, int textviewid)
 	{
 
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item;
 		String name = (String) lv.getItemAtPosition(info.position);
-		int id = (int)info.id;
+		int id = (int) info.id;
 		int position = info.position;
 		int colorint = R.drawable.transparentkopie;
 		Drawable dr;
-		LinearLayout ll = (LinearLayout)info.targetView;
-		TextView tv = (TextView)ll.getChildAt(0);
+		LinearLayout ll = (LinearLayout) info.targetView;
+		TextView tv = (TextView) ll.getChildAt(0);
 		holder = myadapter.new ViewHolder();
 		holder.textView = (TextView) tv;
 
@@ -535,12 +721,13 @@ public class ListViewActivity extends ListActivity
 			((GroepsMaker) getApplication()).gwendolyn.put(name, new Person(name, val6, colorint));
 			break;
 		case R.id.textViewpopup8:
-			
-			for(Map.Entry<String, Person>entry : ((GroepsMaker) getApplication()).gwendolyn.entrySet())
+
+			for (Map.Entry<String, Person> entry : ((GroepsMaker) getApplication()).gwendolyn.entrySet())
 			{
-				entry.setValue(new Person(entry.getValue().getName(),entry.getValue().isIschecked(),R.drawable.transparentkopie));
+				entry.setValue(new Person(entry.getValue().getName(), entry.getValue().isIschecked(),
+						R.drawable.transparentkopie));
 			}
-			
+
 			Set<String> keys = myadapter.selectedIds.keySet();
 			for (String i : keys)
 			{
@@ -578,6 +765,7 @@ public class ListViewActivity extends ListActivity
 			{
 				group.add(entry.getKey());
 			}
+			GROUPSIZE = ((GroepsMaker) getApplication()).gwendolyn.size();
 			onSetData();
 		}
 	}
@@ -608,8 +796,7 @@ public class ListViewActivity extends ListActivity
 		RED2 = colordrawables[4];
 		RED3 = colordrawables[5];
 		BLACK = colordrawables[6];
-		final int GROUPSIZE = ((GroepsMaker) getApplication()).gwendolyn.size();
-		SUBGROUPSIZE = GROUPSIZE / HOWMUCHGROUPS;
+		final int SUBGROUPSIZE = GROUPSIZE / HOWMUCHGROUPS;
 		int MAXSUBGROUPSIZE = SUBGROUPSIZE;
 		if (GROUPSIZE % HOWMUCHGROUPS > 0)
 		{
@@ -641,10 +828,11 @@ public class ListViewActivity extends ListActivity
 		do
 		{
 			int redcounter = 0;
-			int howmuchreds=0;
+			int begin = -1;
+			int howmuchreds = 0;
 			boolean flag = false;
 			int indexgreen = 100;
-			int color = schonelei.get(schonelei.size() - 1).getColorvalue();
+			int color = schonelei.get(0).getColorvalue();
 			for (Person p : schonelei)
 			{
 				if (p.getColorvalue() == color)
@@ -666,29 +854,35 @@ public class ListViewActivity extends ListActivity
 						showAlertDialogInvalidConfigs();
 						return;
 					}
-
 				}
 				if (color == RED1 || color == RED2 || color == RED3)
 				{
 					if (flag == false)
 					{
 						redcounter = getSmallestAvailableSubgroup(schoneleisubs);
+						begin = redcounter;
 						flag = true;
 					}
-
-					schoneleisubs.get(redcounter).addPerson(person);
-					howmuchreds++;
-					schonelei.remove(person);
-					if (howmuchreds>HOWMUCHGROUPS||schoneleisubs.get(redcounter).getSize() > MAXSUBGROUPSIZE)
+					do
 					{
-						showAlertDialogInvalidConfigs();
-						return;
-					}
-					redcounter++;
-					if (redcounter == schoneleisubs.size())
-					{
-						redcounter = 0;
-					}
+						if (schoneleisubs.get(redcounter).getSize() < SUBGROUPSIZE)
+						{
+							schoneleisubs.get(redcounter).addPerson(person);
+							howmuchreds++;
+							schonelei.remove(person);
+							flag = false;
+						}
+						if (howmuchreds > HOWMUCHGROUPS || schoneleisubs.get(redcounter).getSize() > MAXSUBGROUPSIZE)
+						{
+							showAlertDialogInvalidConfigs();
+							return;
+						}
+						redcounter++;
+						if (redcounter == schoneleisubs.size())
+						{
+							redcounter = 0;
+						}
+					} while (flag == true && redcounter != begin);
 				}
 				if (color == BLACK && person.isIschecked() == true)
 				{
@@ -704,7 +898,8 @@ public class ListViewActivity extends ListActivity
 			helper.clear();
 		} while (schonelei.size() > 0);
 
-		// check for invalid configs; we try 10 times to make a partition, after that we give the user a dialog to change his config
+		// check for invalid configs; we try 10 times to make a partition, after
+		// that we give the user a dialog to change his config
 		for (SubGroup sg : schoneleisubs)
 		{
 			if (sg.getSize() > MAXSUBGROUPSIZE || sg.getSize() < SUBGROUPSIZE)
@@ -721,57 +916,33 @@ public class ListViewActivity extends ListActivity
 			}
 		}
 		escapecounter = 0;
-		//sort the subgroups alphabeticaly and prepare an array with strings to put in the intent.
-		ArrayList<String>helper4 = new ArrayList<String>();
-		int groupnum =0;
-		for(SubGroup s : schoneleisubs)
+		// sort the subgroups alphabeticaly and prepare an array with strings to
+		// put in the intent.
+		ArrayList<String> helper4 = new ArrayList<String>();
+		int groupnum = 0;
+		for (SubGroup s : schoneleisubs)
 		{
 			ArrayList<String> helper3 = new ArrayList<String>();
-			for(Person p : s.getPersons())
+			for (Person p : s.getPersons())
 			{
 				helper3.add(p.getName());
 			}
 			Collections.sort(helper3);
 			helper4.add(getResources().getString(R.string.groep1) + " " + String.valueOf(groupnum + 1));
-			for(String str : helper3)
+			for (String str : helper3)
 			{
 				helper4.add(str);
 			}
 			groupnum++;
 		}
 		String[] resultgr = new String[GROUPSIZE + HOWMUCHGROUPS];
-		int index2=0;
-		for(String s1 : helper4)
+		int index2 = 0;
+		for (String s1 : helper4)
 		{
-			resultgr[index2]=s1;
+			resultgr[index2] = s1;
 			index2++;
 		}
 
-		
-		
-		// prepare a string for the resultpage
-//		int groupnumber = 0;
-//		int memberindex = 0;
-//		String[] resultgroups = new String[GROUPSIZE + HOWMUCHGROUPS];
-//
-//		for (int index1 = 0; index1 < resultgroups.length; index1++)
-//		{
-//
-//			if (memberindex == 0)
-//			{
-//				resultgroups[index1] = "Groep" + (String.valueOf(groupnumber + 1));
-//				memberindex++;
-//			} else
-//			{
-//				resultgroups[index1] = schoneleisubs.get(groupnumber).getPersons().get(memberindex - 1).getName();
-//				memberindex++;
-//				if (memberindex == schoneleisubs.get(groupnumber).getSize() + 1)
-//				{
-//					memberindex = 0;
-//					groupnumber++;
-//				}
-//			}
-//		}
 		saveToSharedPrefs();
 		Intent intent = new Intent(ListViewActivity.this, ResultPage.class);
 		intent.putExtra("groupings", resultgr);
@@ -829,9 +1000,7 @@ public class ListViewActivity extends ListActivity
 			if (s.getCheckedItems() == smallest && s.getSize() == smallestsize)
 			{
 				listofsmallests.add(j);
-				break;
-			}
-			if (s.getCheckedItems() == smallest)
+			} else if (s.getCheckedItems() == smallest)
 			{
 				listofsmallests.add(j);
 			}
@@ -841,7 +1010,6 @@ public class ListViewActivity extends ListActivity
 		return listofsmallests.get(ran.nextInt(listofsmallests.size()));
 	}
 
-	
 	public void saveToSharedPrefs()
 	{
 		String tostorestring = "";

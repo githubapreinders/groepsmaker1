@@ -113,22 +113,22 @@ public class Person implements Comparable<Person>
 
 		if (this.getColorvalue() == GREEN1)
 		{
-			return 1;
+			return -1;
 		}
 
 		if (this.getColorvalue() == GREEN2)
 		{
 			if (another.getColorvalue() == GREEN1)
-				return -1;
-			return 1;
+				return 1;
+			return -1;
 		}
 
 		if (this.getColorvalue() == GREEN3)
 		{
 			if (another.getColorvalue() == GREEN1
 					|| another.getColorvalue() == GREEN2)
-				return -1;
-			return 1;
+				return 1;
+			return -1;
 		}
 
 		if (this.getColorvalue() == RED1)
@@ -136,8 +136,8 @@ public class Person implements Comparable<Person>
 			if (another.getColorvalue() == GREEN1
 					|| another.getColorvalue() == GREEN2
 					|| another.getColorvalue() == GREEN3)
-				return -1;
-			return 1;
+				return 1;
+			return -1;
 		}
 
 		if (this.getColorvalue() == RED2)
@@ -147,7 +147,7 @@ public class Person implements Comparable<Person>
 					|| another.getColorvalue() == GREEN3
 					|| another.getColorvalue() == RED1)
 				return -1;
-			return 1;
+			return -1;
 		}
 
 		if (this.getColorvalue() == RED3)
@@ -157,8 +157,8 @@ public class Person implements Comparable<Person>
 					|| another.getColorvalue() == GREEN3
 					|| another.getColorvalue() == RED1
 					|| another.getColorvalue() == RED2)
-				return -1;
-			return 1;
+				return 1;
+			return -1;
 		}
 
 		if (this.getColorvalue() == BLACK)
@@ -169,11 +169,11 @@ public class Person implements Comparable<Person>
 					|| another.getColorvalue() == RED1
 					|| another.getColorvalue() == RED2
 					|| another.getColorvalue() == RED3)
-				return -1;
+				return 1;
 		}
 
 		if(this.getColorvalue() == BLACK&&another.getColorvalue() == BLACK)
-		return b1.compareTo(b2);
+		return b2.compareTo(b1);
 		
 		return 0;
 

@@ -1,6 +1,7 @@
 package course.examples.UI.ListLayout;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 import android.app.ListActivity;
@@ -46,6 +47,7 @@ public class GroupProperties extends ListActivity
 		{
 			group.add(m.getValue());
 		}
+		Collections.sort(group);
 		myadapter = new MyCbArrayAdapter(this, R.id.listitem_property, group);
 		Button gotoShowGroupList = (Button) findViewById(R.id.button1);
 		gotoShowGroupList.setOnClickListener(new View.OnClickListener()
@@ -98,6 +100,7 @@ public class GroupProperties extends ListActivity
 			{
 				group.add(p.getValue());
 			}
+			Collections.sort(group);
 			setListAdapter(myadapter);
 			myadapter.changeData(group);
 			insplits = true;

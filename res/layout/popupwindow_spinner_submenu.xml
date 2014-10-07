@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/layerlist_white_container_and_groupimage"
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp" >
+
+    <TextView
+        android:id="@+id/Spinner_submenu1"
+        style="@style/textview_contextmenu"
+        android:paddingTop="0dp"
+        android:text="Eigen verdeling"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/Spinner_submenu1a"
+        style="@style/textview_contextmenu"
+        android:gravity="center|left"
+        android:paddingTop="0dp"
+        android:text="aantal groepsleden : 22"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/dummy"
+        style="@style/textview_contextmenu_spinner" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/Spinner_submenu2"
+            style="@style/textview_contextmenu_spinner"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:text="@string/aantalgroepen" />
+
+        <Spinner
+            android:id="@+id/Spinner_submenu_spinner1"
+            style="@style/textview_contextmenu_spinner"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:spinnerMode="dialog" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dummy1"
+        style="@style/textview_contextmenu_spinner" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/Spinner_submenu3"
+            style="@style/textview_contextmenu_spinner"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:text="@string/subgroepgrootte" />
+
+        <Spinner
+            android:id="@+id/Spinner_submenu_spinner2"
+            style="@style/textview_contextmenu_spinner"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:spinnerMode="dialog"
+            android:text="sp2" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/Spinner_submenu_button"
+        style="@style/button"
+        android:layout_width="110dp"
+        android:text="@string/ok" >
+    </Button>
+
+</LinearLayout>

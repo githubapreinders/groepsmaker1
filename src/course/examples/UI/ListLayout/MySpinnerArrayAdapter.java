@@ -48,33 +48,33 @@ public class MySpinnerArrayAdapter extends ArrayAdapter<String>
 	public View getDropDownView(int position, View convertView, ViewGroup parent)
 	{
 
-		View mypopupview = convertView;
-		if(mypopupview==null)
-		{
-		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
-		final PopupWindow pw = new PopupWindow(inflater.inflate(R.layout.popupwindow, null, false),400,600, true);
-		pw.showAtLocation(parent, Gravity.CENTER, 0, 0);
-		mypopupview = pw.getContentView();
+//		View mypopupview = convertView;
+//		if(mypopupview==null)
+//		{
+//		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 
+//		final PopupWindow pw = new PopupWindow(inflater.inflate(R.layout.popupwindow, null, false),400,600, true);
+//		pw.showAtLocation(parent, Gravity.CENTER, 0, 0);
+//		mypopupview = pw.getContentView();
+//		
+//		TextView t0 = (TextView)mypopupview.findViewById(R.id.textViewpopup0);
+//		t0.setText(data[position]);
+//		final TextView t1 = (TextView)mypopupview.findViewById(R.id.textViewpopup1);
+//		t1.setOnClickListener(new View.OnClickListener()
+//		{
+//			@Override
+//			public void onClick(View v)
+//			{
+//				pw.dismiss();
+//			}
+//		});
+//		}
+//		
+//		return mypopupview;
+//		
 		
-		TextView t0 = (TextView)mypopupview.findViewById(R.id.textViewpopup0);
-		t0.setText(data[position]);
-		final TextView t1 = (TextView)mypopupview.findViewById(R.id.textViewpopup1);
-		t1.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				pw.dismiss();
-			}
-		});
-		}
-		
-		return mypopupview;
 		
 		
-		
-		/**
-		 * View row = convertView;
+		 View row = convertView;
 		
 		if (row == null)
 		{
@@ -97,7 +97,7 @@ public class MySpinnerArrayAdapter extends ArrayAdapter<String>
 
 		return row;
 
-		 */
+		 
 		
 	}
 
