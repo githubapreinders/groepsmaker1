@@ -47,8 +47,24 @@ public class GroupProperties extends ListActivity
 		{
 			group.add(m.getValue());
 		}
-		Collections.sort(group);
-		myadapter = new MyCbArrayAdapter(this, R.id.listitem_property, group);
+		ArrayList<String> helper = new ArrayList<String>();
+		for(Person p : group)
+		{
+			helper.add(p.getName());
+		}
+		Collections.sort(helper);
+		ArrayList<Person> helper2 = new ArrayList<Person>();
+		for(String s : helper)
+		{
+			for(Person pers : group)
+			{
+				if(pers.getName().equals(s))
+				{
+					helper2.add(pers);
+				}
+			}
+		}
+		myadapter = new MyCbArrayAdapter(this, R.id.listitem_property, helper2);
 		Button gotoShowGroupList = (Button) findViewById(R.id.button1);
 		gotoShowGroupList.setOnClickListener(new View.OnClickListener()
 		{
@@ -100,9 +116,26 @@ public class GroupProperties extends ListActivity
 			{
 				group.add(p.getValue());
 			}
-			Collections.sort(group);
+			ArrayList<String> helper = new ArrayList<String>();
+			for(Person p : group)
+			{
+				helper.add(p.getName());
+			}
+			Collections.sort(helper);
+			ArrayList<Person> helper2 = new ArrayList<Person>();
+			for(String s : helper)
+			{
+				for(Person pers : group)
+				{
+					if(pers.getName().equals(s))
+					{
+						helper2.add(pers);
+					}
+				}
+			}
+			
 			setListAdapter(myadapter);
-			myadapter.changeData(group);
+			myadapter.changeData(helper2);
 			insplits = true;
 
 		}
@@ -134,12 +167,16 @@ public class GroupProperties extends ListActivity
 	public String getSharedPreferences()
 	{
 		String outputstring = "";
-
+		ArrayList<String> helper = new ArrayList<String>();
 		for (Map.Entry<String, Person> m : ((GroepsMaker) getApplication()).gwendolyn.entrySet())
 		{
-			outputstring += m.getKey() + " ";
+			helper.add(m.getKey());
 		}
-
+		Collections.sort(helper);
+		for(String s : helper)
+		{
+			outputstring += s + " ";
+		}
 		return outputstring;
 	}
 

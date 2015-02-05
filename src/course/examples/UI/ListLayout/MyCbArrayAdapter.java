@@ -26,9 +26,6 @@ public class MyCbArrayAdapter extends ArrayAdapter<Person>
 		this.group = group;
 		this.context = context;
 	}
-
-	
-
 	
 	@Override
 	public View getView( int position, View convertView, ViewGroup parent) 
@@ -46,6 +43,7 @@ public class MyCbArrayAdapter extends ArrayAdapter<Person>
 		final CheckBox cb; ;
 		cb = (CheckBox)view.findViewById(R.id.checkBox1);
 		cb.setTag(person);
+		cb.setPadding(10, 0, 0, 0);
 		if(person.ischecked)
 			cb.setChecked(true);
 		else
